@@ -99,10 +99,15 @@ def build(today: datetime.date):
     for ev in upcoming:
         groups.setdefault(ev["_category"], []).append(ev)
 
-    # カテゴリの表示順は CATEGORY_RULES の順、最後にその他
-    ordered_categories = [c for c, _ in CATEGORY_RULES if c in groups]
-    if OTHER_CATEGORY in groups:
-        ordered_categories.append(OTHER_CATEGORY)
+    # カテゴリは「そのカテゴリの最初の(いちばん近い)予定」の開催日・時間が早い順に並べる。
+    # 同じ日どうしは時間(開始時刻)、それも同じなら CATEGORY_RULES の順。
+    rule_index = {c: i for i, (c, _) in enumerate(CATEGORY_RULES)}
+
+    def first_key(cat):
+        first = min(groups[cat], key=lambda e: (e["_start"], e["_end"], e.get("time") or ""))
+        return (first["_start"], first.get("time") or "", rule_index.get(cat, len(rule_index)))
+
+    ordered_categories = sorted(groups, key=first_key)
 
     return ordered_categories, groups, len(upcoming)
 
