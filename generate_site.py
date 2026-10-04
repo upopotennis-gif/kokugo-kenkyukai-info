@@ -138,6 +138,8 @@ def autolink(text: str) -> str:
 
 def render_card(ev) -> str:
     when = fmt_date(ev["_start"], ev["_end"])
+    if (ev.get("time") or "").strip():
+        when += " " + ev["time"].strip()
     deadline = ev.get("deadline")
     deadline_html = (
         f'<p class="deadline">締切 {html.escape(deadline)}</p>' if deadline else ""
@@ -162,10 +164,11 @@ def render_card(ev) -> str:
 def render_quick_table(groups) -> str:
     evs = sorted(
         (e for g in groups.values() for e in g),
-        key=lambda e: (e["_start"], e["_end"], e["name"]),
+        key=lambda e: (e["_start"], e["_end"], e.get("time") or "", e["name"]),
     )
     rows = "\n".join(
         f'<tr><td class="qt-when">{html.escape(fmt_date(e["_start"], e["_end"]))}</td>'
+        f'<td class="qt-time">{html.escape((e.get("time") or "").strip())}</td>'
         f'<td><a href="#{e["_id"]}">{html.escape(e["name"])}</a></td></tr>'
         for e in evs
     )
@@ -233,6 +236,7 @@ TEMPLATE = """<!doctype html>
   .qt td{{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}}
   .qt-when{{white-space:nowrap;color:var(--indigo);font-weight:600;
     font-variant-numeric:tabular-nums;width:1%;}}
+  .qt-time{{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;width:1%;}}
   .qt a{{color:var(--ink);text-decoration:none;}}
   .qt a:hover{{text-decoration:underline;}}
   .card-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}}
