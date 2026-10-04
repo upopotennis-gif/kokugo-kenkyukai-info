@@ -108,11 +108,28 @@ def fmt_date(d: datetime.date, end: datetime.date) -> str:
     return f"{d.year}/{d.month}/{d.day}({wd})"
 
 
-def render_source(source: str) -> str:
-    source = source or ""
+URL_OR_MAIL = re.compile(r"(https?://[^\s<>\"]+|[\w.+-]+@[\w-]+(?:\.[\w-]+)+)")
+
+
+def source_url(source: str) -> str:
+    """情報源がURLならそのURL(空白以降の注記は捨てる)、メール等なら空文字。"""
+    source = (source or "").strip()
     if source.startswith("http"):
-        return f'<a href="{html.escape(source)}">{html.escape(source)}</a>'
-    return html.escape(source)
+        return source.split()[0]
+    return ""
+
+
+def autolink(text: str) -> str:
+    """文中のURLとメールアドレスをリンクにする。"""
+    out, pos = [], 0
+    for m in URL_OR_MAIL.finditer(text):
+        out.append(html.escape(text[pos:m.start()]))
+        tok = m.group(0)
+        href = tok if tok.startswith("http") else "mailto:" + tok
+        out.append(f'<a href="{html.escape(href)}">{html.escape(tok)}</a>')
+        pos = m.end()
+    out.append(html.escape(text[pos:]))
+    return "".join(out)
 
 
 def render_card(ev) -> str:
@@ -121,12 +138,20 @@ def render_card(ev) -> str:
     deadline_html = (
         f'<p class="deadline">締切 {html.escape(deadline)}</p>' if deadline else ""
     )
+    url = source_url(ev.get("source", ""))
+    src_html = (
+        f'<p class="card-src">情報源: <a href="{html.escape(url)}">{html.escape(url)}</a></p>'
+        if url else ""
+    )
+    apply = (ev.get("apply") or "").strip()
+    apply_html = f'<p class="apply">申込 {autolink(apply)}</p>' if apply else ""
     return f"""
     <article class="card">
       <p class="card-when">{html.escape(when)}</p>
       <h3 class="card-title">{html.escape(ev['name'])}</h3>
       {deadline_html}
-      <p class="card-src">情報源: {render_source(ev.get('source', ''))}</p>
+      {apply_html}
+      {src_html}
     </article>"""
 
 
@@ -188,6 +213,7 @@ TEMPLATE = """<!doctype html>
   .card-title{{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:700;
     margin:0 0 8px;text-wrap:balance;}}
   .deadline{{font-size:12px;color:var(--gold);margin:0 0 6px;}}
+  .apply{{font-size:12.5px;margin:0 0 6px;word-break:break-all;}}
   .card-src{{font-size:11.5px;color:var(--muted);margin:8px 0 0;
     word-break:break-all;}}
   .card-src a{{color:var(--muted);}}
