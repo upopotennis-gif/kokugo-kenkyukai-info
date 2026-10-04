@@ -223,6 +223,15 @@ DESCRIPTION:時間: 15:30〜18:30\n申込方法: 美谷島秀明先生へ
  okugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
+UID:e727235802c1dde36913@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270522
+DTEND;VALUE=DATE:20270524
+SUMMARY:全国大学国語教育学会 春季大会（玉川大学）
+DESCRIPTION:情報源: https://www.jtsj.org/taikai\n一覧: https://upopote
+ nnis-gif.github.io/kokugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
 UID:d4dd3aaa72aa400e2db7@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20270619
