@@ -326,17 +326,18 @@ def render_quick_table(groups) -> str:
         key=lambda e: (e["_start"], e["_end"], e.get("time") or "", e["name"]),
     )
     rows = "\n".join(
-        f'<tr><td class="qt-when">{html.escape(fmt_date(e["_start"], e["_end"]))}</td>'
-        f'<td class="qt-time">{html.escape((e.get("time") or "").strip())}</td>'
-        f'<td><a href="#{e["_id"]}">{html.escape(e["name"])}</a></td></tr>'
+        f'<a class="qt-row" href="#{e["_id"]}">'
+        f'<span class="qt-when">{html.escape(fmt_date(e["_start"], e["_end"]))}</span>'
+        f'<span class="qt-time">{html.escape((e.get("time") or "").strip())}</span>'
+        f'<span class="qt-name">{html.escape(e["name"])}</span></a>'
         for e in evs
     )
     return f"""
   <section class="quick">
     <h2 class="category-title">開催日 早見表<span class="count">{len(evs)}件</span></h2>
-    <table class="qt"><tbody>
+    <div class="qt">
 {rows}
-    </tbody></table>
+    </div>
   </section>"""
 
 
@@ -391,13 +392,18 @@ TEMPLATE = """<!doctype html>
   .category-title .count{{font-family:'Noto Sans JP',sans-serif;font-size:11.5px;font-weight:500;
     color:var(--muted);background:var(--indigo-soft);padding:2px 8px;border-radius:10px;}}
   .quick{{margin-bottom:38px;}}
-  .qt{{width:100%;border-collapse:collapse;font-size:14px;}}
-  .qt td{{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}}
-  .qt-when{{white-space:nowrap;color:var(--indigo);font-weight:600;
-    font-variant-numeric:tabular-nums;width:1%;}}
-  .qt-time{{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;width:1%;}}
-  .qt a{{color:var(--ink);text-decoration:none;}}
-  .qt a:hover{{text-decoration:underline;}}
+  .qt{{font-size:14px;}}
+  .qt-row{{display:grid;grid-template-columns:max-content max-content 1fr;column-gap:18px;
+    padding:8px 10px;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none;}}
+  .qt-row:hover{{background:var(--indigo-soft);}}
+  .qt-when{{color:var(--indigo);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;}}
+  .qt-time{{color:var(--muted);font-variant-numeric:tabular-nums;}}
+  .qt-name{{min-width:0;overflow-wrap:anywhere;}}
+  @media (max-width:640px){{
+    body{{padding:28px 16px 48px;}}
+    .qt-row{{grid-template-columns:max-content 1fr;row-gap:2px;padding:9px 6px;}}
+    .qt-name{{grid-column:1 / -1;font-weight:500;}}
+  }}
   .card-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}}
   .card{{background:var(--paper-raised);border:1px solid var(--rule);border-radius:6px;
     box-shadow:var(--shadow);padding:16px 18px;}}

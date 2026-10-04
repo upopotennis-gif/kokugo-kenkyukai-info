@@ -39,13 +39,18 @@
   .category-title .count{font-family:'Noto Sans JP',sans-serif;font-size:11.5px;font-weight:500;
     color:var(--muted);background:var(--indigo-soft);padding:2px 8px;border-radius:10px;}
   .quick{margin-bottom:38px;}
-  .qt{width:100%;border-collapse:collapse;font-size:14px;}
-  .qt td{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
-  .qt-when{white-space:nowrap;color:var(--indigo);font-weight:600;
-    font-variant-numeric:tabular-nums;width:1%;}
-  .qt-time{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;width:1%;}
-  .qt a{color:var(--ink);text-decoration:none;}
-  .qt a:hover{text-decoration:underline;}
+  .qt{font-size:14px;}
+  .qt-row{display:grid;grid-template-columns:max-content max-content 1fr;column-gap:18px;
+    padding:8px 10px;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none;}
+  .qt-row:hover{background:var(--indigo-soft);}
+  .qt-when{color:var(--indigo);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .qt-time{color:var(--muted);font-variant-numeric:tabular-nums;}
+  .qt-name{min-width:0;overflow-wrap:anywhere;}
+  @media (max-width:640px){
+    body{padding:28px 16px 48px;}
+    .qt-row{grid-template-columns:max-content 1fr;row-gap:2px;padding:9px 6px;}
+    .qt-name{grid-column:1 / -1;font-weight:500;}
+  }
   .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
   .card{background:var(--paper-raised);border:1px solid var(--rule);border-radius:6px;
     box-shadow:var(--shadow);padding:16px 18px;}
@@ -112,31 +117,31 @@
   
   <section class="quick">
     <h2 class="category-title">開催日 早見表<span class="count">23件</span></h2>
-    <table class="qt"><tbody>
-<tr><td class="qt-when">2026/10/4(日)</td><td class="qt-time">13:00〜16:30</td><td><a href="#ev1">日本国語教育学会 新潟支部総会・研究会</a></td></tr>
-<tr><td class="qt-when">2026/10/4(日)</td><td class="qt-time">14:00〜16:30</td><td><a href="#ev2">日本国語教育学会 企画・情報部主催 国語授業力アップへの実践セミナー</a></td></tr>
-<tr><td class="qt-when">2026/10/10(土)</td><td class="qt-time">10:00〜16:50 (受付 9:30)</td><td><a href="#ev6">大村はま生誕120年記念研究大会 横浜大会</a></td></tr>
-<tr><td class="qt-when">2026/10/10(土)</td><td class="qt-time">12:50〜17:00</td><td><a href="#ev3">日本国語教育学会 和歌山地区研究集会</a></td></tr>
-<tr><td class="qt-when">2026/10/17(土)</td><td class="qt-time">15:30〜18:30</td><td><a href="#ev7">国語教育史と実践に学ぶ会 第253回研究会</a></td></tr>
-<tr><td class="qt-when">2026/10/24(土)〜25(日)</td><td class="qt-time"></td><td><a href="#ev11">全国大学国語教育学会 秋季大会（鳥取大会）</a></td></tr>
-<tr><td class="qt-when">2026/10/31(土)</td><td class="qt-time">13:00〜 (対面 12:30開場)</td><td><a href="#ev13">早稲田大学国語教育学会 2026年度秋季例会（第309回・第20回学生会員研究発表会）</a></td></tr>
-<tr><td class="qt-when">2026/10/31(土)</td><td class="qt-time">14:00〜16:30</td><td><a href="#ev4">日本国語教育学会 中学校部会公開研究会</a></td></tr>
-<tr><td class="qt-when">2026/10/31(土)</td><td class="qt-time">21:00〜22:30 (希望者は23:00まで)</td><td><a href="#ev14">第46回今日も明日も授業道オンライン交流会（生成AI×文学）</a></td></tr>
-<tr><td class="qt-when">2026/11/5(木)〜8(日)</td><td class="qt-time"></td><td><a href="#ev16">教育関連学会連絡協議会 第25回アジアAHRD大会</a></td></tr>
-<tr><td class="qt-when">2026/11/7(土)</td><td class="qt-time">14:30〜17:30</td><td><a href="#ev5">日本国語教育学会 高等学校部会 第90回研究会</a></td></tr>
-<tr><td class="qt-when">2026/11/14(土)</td><td class="qt-time">17:00〜</td><td><a href="#ev17">國學院大學国語教育研究会 第57回月例会</a></td></tr>
-<tr><td class="qt-when">2026/11/21(土)</td><td class="qt-time">15:30〜18:30</td><td><a href="#ev8">国語教育史と実践に学ぶ会 第254回研究会</a></td></tr>
-<tr><td class="qt-when">2026/11/21(土)〜22(日)</td><td class="qt-time"></td><td><a href="#ev21">國學院大學國文學會 秋季大会</a></td></tr>
-<tr><td class="qt-when">2026/11/22(日)</td><td class="qt-time">15:00ごろ〜</td><td><a href="#ev15">これからの高校国語教育研究会 第36回例会</a></td></tr>
-<tr><td class="qt-when">2026/11/29(日)</td><td class="qt-time">13:00〜 (12:30受付)</td><td><a href="#ev22">日本文学協会 11月例会（シンポジウム）</a></td></tr>
-<tr><td class="qt-when">2026/12/12(土)</td><td class="qt-time">午後</td><td><a href="#ev18">國學院大學国語教育研究会 第14回大会</a></td></tr>
-<tr><td class="qt-when">2026/12/26(土)</td><td class="qt-time">15:30〜18:30</td><td><a href="#ev9">国語教育史と実践に学ぶ会 第255回研究会</a></td></tr>
-<tr><td class="qt-when">2027/1/30(土)</td><td class="qt-time">17:00〜</td><td><a href="#ev19">國學院大學国語教育研究会 第58回月例会</a></td></tr>
-<tr><td class="qt-when">2027/3/13(土)</td><td class="qt-time">17:00〜</td><td><a href="#ev20">國學院大學国語教育研究会 第59回月例会</a></td></tr>
-<tr><td class="qt-when">2027/3/27(土)</td><td class="qt-time">15:30〜18:30</td><td><a href="#ev10">国語教育史と実践に学ぶ会 第256回研究会</a></td></tr>
-<tr><td class="qt-when">2027/5/22(土)〜23(日)</td><td class="qt-time"></td><td><a href="#ev12">全国大学国語教育学会 春季大会（玉川大学）</a></td></tr>
-<tr><td class="qt-when">2027/6/19(土)</td><td class="qt-time"></td><td><a href="#ev23">全国漢文教育学会 第42回（通算72回）大会</a></td></tr>
-    </tbody></table>
+    <div class="qt">
+<a class="qt-row" href="#ev1"><span class="qt-when">2026/10/4(日)</span><span class="qt-time">13:00〜16:30</span><span class="qt-name">日本国語教育学会 新潟支部総会・研究会</span></a>
+<a class="qt-row" href="#ev2"><span class="qt-when">2026/10/4(日)</span><span class="qt-time">14:00〜16:30</span><span class="qt-name">日本国語教育学会 企画・情報部主催 国語授業力アップへの実践セミナー</span></a>
+<a class="qt-row" href="#ev6"><span class="qt-when">2026/10/10(土)</span><span class="qt-time">10:00〜16:50 (受付 9:30)</span><span class="qt-name">大村はま生誕120年記念研究大会 横浜大会</span></a>
+<a class="qt-row" href="#ev3"><span class="qt-when">2026/10/10(土)</span><span class="qt-time">12:50〜17:00</span><span class="qt-name">日本国語教育学会 和歌山地区研究集会</span></a>
+<a class="qt-row" href="#ev7"><span class="qt-when">2026/10/17(土)</span><span class="qt-time">15:30〜18:30</span><span class="qt-name">国語教育史と実践に学ぶ会 第253回研究会</span></a>
+<a class="qt-row" href="#ev11"><span class="qt-when">2026/10/24(土)〜25(日)</span><span class="qt-time"></span><span class="qt-name">全国大学国語教育学会 秋季大会（鳥取大会）</span></a>
+<a class="qt-row" href="#ev13"><span class="qt-when">2026/10/31(土)</span><span class="qt-time">13:00〜 (対面 12:30開場)</span><span class="qt-name">早稲田大学国語教育学会 2026年度秋季例会（第309回・第20回学生会員研究発表会）</span></a>
+<a class="qt-row" href="#ev4"><span class="qt-when">2026/10/31(土)</span><span class="qt-time">14:00〜16:30</span><span class="qt-name">日本国語教育学会 中学校部会公開研究会</span></a>
+<a class="qt-row" href="#ev14"><span class="qt-when">2026/10/31(土)</span><span class="qt-time">21:00〜22:30 (希望者は23:00まで)</span><span class="qt-name">第46回今日も明日も授業道オンライン交流会（生成AI×文学）</span></a>
+<a class="qt-row" href="#ev16"><span class="qt-when">2026/11/5(木)〜8(日)</span><span class="qt-time"></span><span class="qt-name">教育関連学会連絡協議会 第25回アジアAHRD大会</span></a>
+<a class="qt-row" href="#ev5"><span class="qt-when">2026/11/7(土)</span><span class="qt-time">14:30〜17:30</span><span class="qt-name">日本国語教育学会 高等学校部会 第90回研究会</span></a>
+<a class="qt-row" href="#ev17"><span class="qt-when">2026/11/14(土)</span><span class="qt-time">17:00〜</span><span class="qt-name">國學院大學国語教育研究会 第57回月例会</span></a>
+<a class="qt-row" href="#ev8"><span class="qt-when">2026/11/21(土)</span><span class="qt-time">15:30〜18:30</span><span class="qt-name">国語教育史と実践に学ぶ会 第254回研究会</span></a>
+<a class="qt-row" href="#ev21"><span class="qt-when">2026/11/21(土)〜22(日)</span><span class="qt-time"></span><span class="qt-name">國學院大學國文學會 秋季大会</span></a>
+<a class="qt-row" href="#ev15"><span class="qt-when">2026/11/22(日)</span><span class="qt-time">15:00ごろ〜</span><span class="qt-name">これからの高校国語教育研究会 第36回例会</span></a>
+<a class="qt-row" href="#ev22"><span class="qt-when">2026/11/29(日)</span><span class="qt-time">13:00〜 (12:30受付)</span><span class="qt-name">日本文学協会 11月例会（シンポジウム）</span></a>
+<a class="qt-row" href="#ev18"><span class="qt-when">2026/12/12(土)</span><span class="qt-time">午後</span><span class="qt-name">國學院大學国語教育研究会 第14回大会</span></a>
+<a class="qt-row" href="#ev9"><span class="qt-when">2026/12/26(土)</span><span class="qt-time">15:30〜18:30</span><span class="qt-name">国語教育史と実践に学ぶ会 第255回研究会</span></a>
+<a class="qt-row" href="#ev19"><span class="qt-when">2027/1/30(土)</span><span class="qt-time">17:00〜</span><span class="qt-name">國學院大學国語教育研究会 第58回月例会</span></a>
+<a class="qt-row" href="#ev20"><span class="qt-when">2027/3/13(土)</span><span class="qt-time">17:00〜</span><span class="qt-name">國學院大學国語教育研究会 第59回月例会</span></a>
+<a class="qt-row" href="#ev10"><span class="qt-when">2027/3/27(土)</span><span class="qt-time">15:30〜18:30</span><span class="qt-name">国語教育史と実践に学ぶ会 第256回研究会</span></a>
+<a class="qt-row" href="#ev12"><span class="qt-when">2027/5/22(土)〜23(日)</span><span class="qt-time"></span><span class="qt-name">全国大学国語教育学会 春季大会（玉川大学）</span></a>
+<a class="qt-row" href="#ev23"><span class="qt-when">2027/6/19(土)</span><span class="qt-time"></span><span class="qt-name">全国漢文教育学会 第42回（通算72回）大会</span></a>
+    </div>
   </section>
   
     <section class="category">
