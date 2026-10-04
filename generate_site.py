@@ -150,13 +150,32 @@ def render_card(ev) -> str:
     apply = (ev.get("apply") or "").strip()
     apply_html = f'<p class="apply">申込方法 {autolink(apply)}</p>' if apply else ""
     return f"""
-    <article class="card">
+    <article class="card" id="{ev['_id']}">
       <p class="card-when">{html.escape(when)}</p>
       <h3 class="card-title">{html.escape(ev['name'])}</h3>
       {deadline_html}
       {apply_html}
       {src_html}
     </article>"""
+
+
+def render_quick_table(groups) -> str:
+    evs = sorted(
+        (e for g in groups.values() for e in g),
+        key=lambda e: (e["_start"], e["_end"], e["name"]),
+    )
+    rows = "\n".join(
+        f'<tr><td class="qt-when">{html.escape(fmt_date(e["_start"], e["_end"]))}</td>'
+        f'<td><a href="#{e["_id"]}">{html.escape(e["name"])}</a></td></tr>'
+        for e in evs
+    )
+    return f"""
+  <section class="quick">
+    <h2 class="category-title">開催日 早見表<span class="count">{len(evs)}件</span></h2>
+    <table class="qt"><tbody>
+{rows}
+    </tbody></table>
+  </section>"""
 
 
 def render_category(name: str, evs) -> str:
@@ -209,6 +228,13 @@ TEMPLATE = """<!doctype html>
     border-bottom:1px solid var(--rule);padding-bottom:8px;}}
   .category-title .count{{font-family:'Noto Sans JP',sans-serif;font-size:11.5px;font-weight:500;
     color:var(--muted);background:var(--indigo-soft);padding:2px 8px;border-radius:10px;}}
+  .quick{{margin-bottom:38px;}}
+  .qt{{width:100%;border-collapse:collapse;font-size:14px;}}
+  .qt td{{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}}
+  .qt-when{{white-space:nowrap;color:var(--indigo);font-weight:600;
+    font-variant-numeric:tabular-nums;width:1%;}}
+  .qt a{{color:var(--ink);text-decoration:none;}}
+  .qt a:hover{{text-decoration:underline;}}
   .card-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}}
   .card{{background:var(--paper-raised);border:1px solid var(--rule);border-radius:6px;
     box-shadow:var(--shadow);padding:16px 18px;}}
@@ -233,6 +259,7 @@ TEMPLATE = """<!doctype html>
     <p class="updated">最終更新 {updated}</p>
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全{total}件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
+  {quick}
   {sections}
   <footer>
     このページは「学会・研究会情報 収集ルーティン」が巡回のたびに自動更新しています。掲載内容の正確性は各学会の公式サイトでご確認ください。
@@ -248,10 +275,17 @@ def main():
     if len(sys.argv) > 1:
         today = datetime.date.fromisoformat(sys.argv[1])
     ordered_categories, groups, total = build(today)
+    n = 0
+    for c in ordered_categories:
+        for e in groups[c]:
+            n += 1
+            e["_id"] = f"ev{n}"
+    quick = render_quick_table(groups)
     sections = "\n".join(render_category(c, groups[c]) for c in ordered_categories)
     output = TEMPLATE.format(
         updated=today.isoformat(),
         total=total,
+        quick=quick,
         sections=sections,
     )
     OUTPUT_PATH.write_text(output, encoding="utf-8")

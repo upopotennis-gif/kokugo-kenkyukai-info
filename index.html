@@ -38,6 +38,13 @@
     border-bottom:1px solid var(--rule);padding-bottom:8px;}
   .category-title .count{font-family:'Noto Sans JP',sans-serif;font-size:11.5px;font-weight:500;
     color:var(--muted);background:var(--indigo-soft);padding:2px 8px;border-radius:10px;}
+  .quick{margin-bottom:38px;}
+  .qt{width:100%;border-collapse:collapse;font-size:14px;}
+  .qt td{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+  .qt-when{white-space:nowrap;color:var(--indigo);font-weight:600;
+    font-variant-numeric:tabular-nums;width:1%;}
+  .qt a{color:var(--ink);text-decoration:none;}
+  .qt a:hover{text-decoration:underline;}
   .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
   .card{background:var(--paper-raised);border:1px solid var(--rule);border-radius:6px;
     box-shadow:var(--shadow);padding:16px 18px;}
@@ -63,10 +70,38 @@
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全22件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
   
+  <section class="quick">
+    <h2 class="category-title">開催日 早見表<span class="count">22件</span></h2>
+    <table class="qt"><tbody>
+<tr><td class="qt-when">2026/10/4(日)</td><td><a href="#ev4">日本国語教育学会 企画・情報部主催 国語授業力アップへの実践セミナー</a></td></tr>
+<tr><td class="qt-when">2026/10/4(日)</td><td><a href="#ev3">日本国語教育学会 新潟支部総会・研究会</a></td></tr>
+<tr><td class="qt-when">2026/10/10(土)</td><td><a href="#ev9">大村はま生誕120年記念研究大会 横浜大会</a></td></tr>
+<tr><td class="qt-when">2026/10/10(土)</td><td><a href="#ev5">日本国語教育学会 和歌山地区研究集会</a></td></tr>
+<tr><td class="qt-when">2026/10/17(土)</td><td><a href="#ev11">国語教育史と実践に学ぶ会 第253回研究会</a></td></tr>
+<tr><td class="qt-when">2026/10/24(土)〜25(日)</td><td><a href="#ev2">全国大学国語教育学会 秋季大会（鳥取大会）</a></td></tr>
+<tr><td class="qt-when">2026/10/31(土)</td><td><a href="#ev6">日本国語教育学会 中学校部会公開研究会</a></td></tr>
+<tr><td class="qt-when">2026/10/31(土)</td><td><a href="#ev1">早稲田大学国語教育学会 2026年度秋季例会（第309回・第20回学生会員研究発表会）</a></td></tr>
+<tr><td class="qt-when">2026/10/31(土)</td><td><a href="#ev21">第46回今日も明日も授業道オンライン交流会（生成AI×文学）</a></td></tr>
+<tr><td class="qt-when">2026/11/5(木)〜8(日)</td><td><a href="#ev10">教育関連学会連絡協議会 第25回アジアAHRD大会</a></td></tr>
+<tr><td class="qt-when">2026/11/7(土)</td><td><a href="#ev7">日本国語教育学会 高等学校部会 第90回研究会</a></td></tr>
+<tr><td class="qt-when">2026/11/14(土)</td><td><a href="#ev16">國學院大學国語教育研究会 第57回月例会</a></td></tr>
+<tr><td class="qt-when">2026/11/21(土)</td><td><a href="#ev12">国語教育史と実践に学ぶ会 第254回研究会</a></td></tr>
+<tr><td class="qt-when">2026/11/21(土)〜22(日)</td><td><a href="#ev15">國學院大學國文學會 秋季大会</a></td></tr>
+<tr><td class="qt-when">2026/11/22(日)</td><td><a href="#ev22">これからの高校国語教育研究会 第36回例会</a></td></tr>
+<tr><td class="qt-when">2026/11/29(日)</td><td><a href="#ev20">日本文学協会 11月例会（シンポジウム）</a></td></tr>
+<tr><td class="qt-when">2026/12/12(土)</td><td><a href="#ev17">國學院大學国語教育研究会 第14回大会</a></td></tr>
+<tr><td class="qt-when">2026/12/26(土)</td><td><a href="#ev13">国語教育史と実践に学ぶ会 第255回研究会</a></td></tr>
+<tr><td class="qt-when">2027/1/30(土)</td><td><a href="#ev18">國學院大學国語教育研究会 第58回月例会</a></td></tr>
+<tr><td class="qt-when">2027/3/13(土)</td><td><a href="#ev19">國學院大學国語教育研究会 第59回月例会</a></td></tr>
+<tr><td class="qt-when">2027/3/27(土)</td><td><a href="#ev14">国語教育史と実践に学ぶ会 第256回研究会</a></td></tr>
+<tr><td class="qt-when">2027/6/19(土)</td><td><a href="#ev8">全国漢文教育学会 第42回（通算72回）大会</a></td></tr>
+    </tbody></table>
+  </section>
+  
     <section class="category">
       <h2 class="category-title">早稲田大学国語教育学会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev1">
       <p class="card-when">2026/10/31(土)</p>
       <h3 class="card-title">早稲田大学国語教育学会 2026年度秋季例会（第309回・第20回学生会員研究発表会）</h3>
       
@@ -79,7 +114,7 @@
     <section class="category">
       <h2 class="category-title">全国大学国語教育学会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev2">
       <p class="card-when">2026/10/24(土)〜25(日)</p>
       <h3 class="card-title">全国大学国語教育学会 秋季大会（鳥取大会）</h3>
       
@@ -92,7 +127,7 @@
     <section class="category">
       <h2 class="category-title">日本国語教育学会<span class="count">5件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev3">
       <p class="card-when">2026/10/4(日)</p>
       <h3 class="card-title">日本国語教育学会 新潟支部総会・研究会</h3>
       
@@ -100,7 +135,7 @@
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
     </article>
 
-    <article class="card">
+    <article class="card" id="ev4">
       <p class="card-when">2026/10/4(日)</p>
       <h3 class="card-title">日本国語教育学会 企画・情報部主催 国語授業力アップへの実践セミナー</h3>
       
@@ -108,7 +143,7 @@
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
     </article>
 
-    <article class="card">
+    <article class="card" id="ev5">
       <p class="card-when">2026/10/10(土)</p>
       <h3 class="card-title">日本国語教育学会 和歌山地区研究集会</h3>
       
@@ -116,7 +151,7 @@
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
     </article>
 
-    <article class="card">
+    <article class="card" id="ev6">
       <p class="card-when">2026/10/31(土)</p>
       <h3 class="card-title">日本国語教育学会 中学校部会公開研究会</h3>
       <p class="deadline">締切 2026-10-30</p>
@@ -124,7 +159,7 @@
       <p class="card-src">情報源: <a href="http://nikkokug.org/bukai.html">http://nikkokug.org/bukai.html</a></p>
     </article>
 
-    <article class="card">
+    <article class="card" id="ev7">
       <p class="card-when">2026/11/7(土)</p>
       <h3 class="card-title">日本国語教育学会 高等学校部会 第90回研究会</h3>
       
@@ -137,7 +172,7 @@
     <section class="category">
       <h2 class="category-title">全国漢文教育学会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev8">
       <p class="card-when">2027/6/19(土)</p>
       <h3 class="card-title">全国漢文教育学会 第42回（通算72回）大会</h3>
       <p class="deadline">締切 2026-12-31</p>
@@ -150,7 +185,7 @@
     <section class="category">
       <h2 class="category-title">大村はま記念国語教育の会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev9">
       <p class="card-when">2026/10/10(土)</p>
       <h3 class="card-title">大村はま生誕120年記念研究大会 横浜大会</h3>
       <p class="deadline">締切 2026-09-30</p>
@@ -163,7 +198,7 @@
     <section class="category">
       <h2 class="category-title">教育関連学会連絡協議会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev10">
       <p class="card-when">2026/11/5(木)〜8(日)</p>
       <h3 class="card-title">教育関連学会連絡協議会 第25回アジアAHRD大会</h3>
       
@@ -176,7 +211,7 @@
     <section class="category">
       <h2 class="category-title">国語教育史と実践に学ぶ会<span class="count">4件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev11">
       <p class="card-when">2026/10/17(土)</p>
       <h3 class="card-title">国語教育史と実践に学ぶ会 第253回研究会</h3>
       <p class="deadline">締切 2026-10-12</p>
@@ -184,7 +219,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev12">
       <p class="card-when">2026/11/21(土)</p>
       <h3 class="card-title">国語教育史と実践に学ぶ会 第254回研究会</h3>
       
@@ -192,7 +227,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev13">
       <p class="card-when">2026/12/26(土)</p>
       <h3 class="card-title">国語教育史と実践に学ぶ会 第255回研究会</h3>
       
@@ -200,7 +235,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev14">
       <p class="card-when">2027/3/27(土)</p>
       <h3 class="card-title">国語教育史と実践に学ぶ会 第256回研究会</h3>
       
@@ -213,7 +248,7 @@
     <section class="category">
       <h2 class="category-title">國學院大學國文學會<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev15">
       <p class="card-when">2026/11/21(土)〜22(日)</p>
       <h3 class="card-title">國學院大學國文學會 秋季大会</h3>
       
@@ -226,7 +261,7 @@
     <section class="category">
       <h2 class="category-title">國學院大學国語教育研究会<span class="count">4件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev16">
       <p class="card-when">2026/11/14(土)</p>
       <h3 class="card-title">國學院大學国語教育研究会 第57回月例会</h3>
       
@@ -234,7 +269,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev17">
       <p class="card-when">2026/12/12(土)</p>
       <h3 class="card-title">國學院大學国語教育研究会 第14回大会</h3>
       
@@ -242,7 +277,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev18">
       <p class="card-when">2027/1/30(土)</p>
       <h3 class="card-title">國學院大學国語教育研究会 第58回月例会</h3>
       
@@ -250,7 +285,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev19">
       <p class="card-when">2027/3/13(土)</p>
       <h3 class="card-title">國學院大學国語教育研究会 第59回月例会</h3>
       
@@ -263,7 +298,7 @@
     <section class="category">
       <h2 class="category-title">日本文学協会<span class="count">1件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev20">
       <p class="card-when">2026/11/29(日)</p>
       <h3 class="card-title">日本文学協会 11月例会（シンポジウム）</h3>
       
@@ -276,7 +311,7 @@
     <section class="category">
       <h2 class="category-title">その他の勉強会・研究会<span class="count">2件</span></h2>
       <div class="card-grid">
-    <article class="card">
+    <article class="card" id="ev21">
       <p class="card-when">2026/10/31(土)</p>
       <h3 class="card-title">第46回今日も明日も授業道オンライン交流会（生成AI×文学）</h3>
       <p class="deadline">締切 2026-10-31</p>
@@ -284,7 +319,7 @@
       
     </article>
 
-    <article class="card">
+    <article class="card" id="ev22">
       <p class="card-when">2026/11/22(日)</p>
       <h3 class="card-title">これからの高校国語教育研究会 第36回例会</h3>
       <p class="deadline">締切 2026-11-13</p>
