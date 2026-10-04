@@ -375,9 +375,12 @@ TEMPLATE = """<!doctype html>
   .gcal a{{color:var(--indigo);}}
   .subscribe{{background:var(--indigo-soft);border:1px solid var(--rule);border-radius:6px;
     padding:12px 16px;margin:0 0 28px;font-size:13.5px;}}
-  .subscribe summary{{cursor:pointer;color:var(--muted);font-size:12.5px;margin-top:6px;}}
-  .subscribe ol{{margin:8px 0 0;padding-left:1.4em;font-size:12.5px;color:var(--muted);}}
-  .subscribe code{{word-break:break-all;}}
+  .subscribe ul{{margin:8px 0 0;padding-left:1.4em;font-size:12.5px;color:var(--muted);}}
+  .subscribe li{{margin:3px 0;}}
+  .sub-url{{margin:8px 0 0;}}
+  .subscribe code{{word-break:break-all;font-size:12px;}}
+  .subscribe button{{font:inherit;font-size:12px;margin-left:6px;padding:2px 10px;border:1px solid var(--rule);
+    border-radius:4px;background:var(--paper-raised);color:var(--ink);cursor:pointer;}}
   footer{{border-top:1px solid var(--rule);padding-top:18px;margin-top:20px;
     font-size:12px;color:var(--muted);}}
   footer a{{color:var(--indigo);}}
@@ -391,15 +394,23 @@ TEMPLATE = """<!doctype html>
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全{total}件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
   <div class="subscribe">
-    <strong>📅 カレンダーに登録</strong>(自動更新・購読):
-    <a href="webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics">iPhone / Mac で登録</a>
-    ・ <a href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">Googleカレンダーで登録</a>
-    <details><summary>うまく登録できないとき</summary>
-      <ol>
-        <li>Googleカレンダー(パソコン): 左の「他のカレンダー」の＋ →「URLで追加」に次のURLを貼り付け<br><code>https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code></li>
-        <li>予定は毎日自動で入れ替わります(Google側の反映は半日〜1日ほど遅れることがあります)。1件だけ追加したいときは、各カードの「Googleカレンダーに追加」を使ってください。</li>
-      </ol>
-    </details>
+    <strong>📅 カレンダーに登録</strong>(購読すると、予定の追加・変更が自動で反映されます)
+    <p class="sub-url"><code id="ics-url">https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code>
+      <button type="button" id="ics-copy">URLをコピー</button></p>
+    <ul>
+      <li><strong>iPhone / iPad</strong>: 「設定」→「カレンダー」→「アカウント」→「アカウントを追加」→「その他」→「照会するカレンダーを追加」→ コピーしたURLを貼り付けて「次へ」→「保存」</li>
+      <li><strong>Mac のカレンダー</strong>: メニュー「ファイル」→「新規カレンダー照会…」→ URLを貼り付けて「照会」→ 自動更新を「1日」などに設定</li>
+      <li><strong>Googleカレンダー</strong>: <a href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">ここから登録</a>(パソコンでは「他のカレンダー」の＋→「URLで追加」でも可)</li>
+      <li>購読せず、いまの予定だけ取り込むなら <a href="calendar.ics" download>calendar.ics をダウンロード</a>(あとの変更は反映されません)</li>
+    </ul>
+    <script>
+      document.getElementById("ics-copy").addEventListener("click", function () {{
+        var url = document.getElementById("ics-url").textContent, btn = this;
+        function done() {{ btn.textContent = "コピーしました"; }}
+        if (navigator.clipboard) {{ navigator.clipboard.writeText(url).then(done, function () {{}}); }}
+        else {{ var r = document.createRange(); r.selectNode(document.getElementById("ics-url")); getSelection().removeAllRanges(); getSelection().addRange(r); document.execCommand("copy"); done(); }}
+      }});
+    </script>
   </div>
   {quick}
   {sections}
