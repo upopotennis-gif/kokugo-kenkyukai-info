@@ -13,8 +13,10 @@ events.json (Notionデータベースからエクスポートした全件) を�
 Claudeが毎回呼び出す想定(Notionへの新規追加後に events.json を更新し、
 本スクリプトで index.html を再生成 → git commit & push)。
 """
+import hashlib
 import json
 import re
+import urllib.parse
 import datetime
 import html
 import sys
@@ -23,6 +25,8 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 EVENTS_PATH = ROOT / "events.json"
 OUTPUT_PATH = ROOT / "index.html"
+ICS_PATH = ROOT / "calendar.ics"
+SITE_URL = "https://upopotennis-gif.github.io/kokugo-kenkyukai-info/"
 
 # カテゴリ判定ルール(先にマッチしたものを採用)。イベント名に含まれるキーワードで判定する。
 CATEGORY_RULES = [
@@ -158,7 +162,123 @@ def render_card(ev) -> str:
       {deadline_html}
       {apply_html}
       {src_html}
+      <p class="gcal"><a href="{html.escape(gcal_link(ev))}" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
     </article>"""
+
+
+# ---- カレンダー(ICS購読フィード / Googleカレンダー追加リンク) ----
+TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
+PAREN_RE = re.compile(r"[(（][^)）]*[)）]")
+
+
+def event_span(ev):
+    """(終日か, 開始, 終了) を返す。終日のときの終了日は排他的(翌日)。
+    時間は「15:30〜18:30」形式から読む。かっこ内(受付・開場など)は無視。
+    単日で開始時刻だけなら1時間、時刻が読めない・複数日なら終日扱い。"""
+    start, end = ev["_start"], ev["_end"]
+    times = TIME_RE.findall(PAREN_RE.sub("", ev.get("time") or ""))
+    if times and start == end:
+        h, m = map(int, times[0])
+        s = datetime.datetime.combine(start, datetime.time(h, m))
+        e = s + datetime.timedelta(hours=1)
+        if len(times) >= 2:
+            h2, m2 = map(int, times[-1])
+            e2 = datetime.datetime.combine(end, datetime.time(h2, m2))
+            if e2 > s:
+                e = e2
+        return False, s, e
+    return True, start, end + datetime.timedelta(days=1)
+
+
+def event_details(ev) -> str:
+    lines = []
+    if (ev.get("time") or "").strip():
+        lines.append("時間: " + ev["time"].strip())
+    if ev.get("deadline"):
+        lines.append("申込締切: " + ev["deadline"])
+    if (ev.get("apply") or "").strip():
+        lines.append("申込方法: " + ev["apply"].strip())
+    url = source_url(ev.get("source", ""))
+    if url:
+        lines.append("情報源: " + url)
+    lines.append("一覧: " + SITE_URL)
+    return "\n".join(lines)
+
+
+def gcal_link(ev) -> str:
+    allday, s, e = event_span(ev)
+    fmt = "%Y%m%d" if allday else "%Y%m%dT%H%M%S"
+    q = urllib.parse.urlencode({
+        "action": "TEMPLATE",
+        "text": ev["name"],
+        "dates": f"{s.strftime(fmt)}/{e.strftime(fmt)}",
+        "details": event_details(ev),
+        "ctz": "Asia/Tokyo",
+    })
+    return "https://calendar.google.com/calendar/render?" + q
+
+
+def _ics_escape(text: str) -> str:
+    return (text.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+            .replace("\n", "\\n"))
+
+
+def _ics_fold(line: str) -> str:
+    """RFC 5545: 1行は75オクテットまで。超える分は半角スペース始まりの継続行にする。"""
+    out, cur, size = [], "", 0
+    for ch in line:
+        n = len(ch.encode("utf-8"))
+        if size + n > 75:
+            out.append(cur)
+            cur, size = " " + ch, 1 + n
+        else:
+            cur += ch
+            size += n
+    out.append(cur)
+    return "\r\n".join(out)
+
+
+def build_ics(groups) -> str:
+    evs = sorted(
+        (e for g in groups.values() for e in g),
+        key=lambda e: (e["_start"], e["_end"], e["name"]),
+    )
+    lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//kokugo-kenkyukai-info//JA",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "X-WR-CALNAME:国語科 学会・研究会",
+        "X-WR-TIMEZONE:Asia/Tokyo",
+        "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
+        "X-PUBLISHED-TTL:PT12H",
+        "BEGIN:VTIMEZONE",
+        "TZID:Asia/Tokyo",
+        "BEGIN:STANDARD",
+        "DTSTART:19700101T000000",
+        "TZOFFSETFROM:+0900",
+        "TZOFFSETTO:+0900",
+        "TZNAME:JST",
+        "END:STANDARD",
+        "END:VTIMEZONE",
+    ]
+    for e in evs:
+        allday, s, en = event_span(e)
+        uid = hashlib.sha1((e["name"] + e.get("eventDate", "")).encode("utf-8")).hexdigest()[:20]
+        lines += ["BEGIN:VEVENT", f"UID:{uid}@kokugo-kenkyukai-info",
+                  "DTSTAMP:20260101T000000Z"]
+        if allday:
+            lines += [f"DTSTART;VALUE=DATE:{s.strftime('%Y%m%d')}",
+                      f"DTEND;VALUE=DATE:{en.strftime('%Y%m%d')}"]
+        else:
+            lines += [f"DTSTART;TZID=Asia/Tokyo:{s.strftime('%Y%m%dT%H%M%S')}",
+                      f"DTEND;TZID=Asia/Tokyo:{en.strftime('%Y%m%dT%H%M%S')}"]
+        lines += [f"SUMMARY:{_ics_escape(e['name'])}",
+                  f"DESCRIPTION:{_ics_escape(event_details(e))}",
+                  "END:VEVENT"]
+    lines.append("END:VCALENDAR")
+    return "\r\n".join(_ics_fold(l) for l in lines) + "\r\n"
 
 
 def render_quick_table(groups) -> str:
@@ -251,6 +371,13 @@ TEMPLATE = """<!doctype html>
   .card-src{{font-size:11.5px;color:var(--muted);margin:8px 0 0;
     word-break:break-all;}}
   .card-src a{{color:var(--muted);}}
+  .gcal{{font-size:11.5px;margin:6px 0 0;}}
+  .gcal a{{color:var(--indigo);}}
+  .subscribe{{background:var(--indigo-soft);border:1px solid var(--rule);border-radius:6px;
+    padding:12px 16px;margin:0 0 28px;font-size:13.5px;}}
+  .subscribe summary{{cursor:pointer;color:var(--muted);font-size:12.5px;margin-top:6px;}}
+  .subscribe ol{{margin:8px 0 0;padding-left:1.4em;font-size:12.5px;color:var(--muted);}}
+  .subscribe code{{word-break:break-all;}}
   footer{{border-top:1px solid var(--rule);padding-top:18px;margin-top:20px;
     font-size:12px;color:var(--muted);}}
   footer a{{color:var(--indigo);}}
@@ -263,6 +390,17 @@ TEMPLATE = """<!doctype html>
     <p class="updated">最終更新 {updated}</p>
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全{total}件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
+  <div class="subscribe">
+    <strong>📅 カレンダーに登録</strong>(自動更新・購読):
+    <a href="webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics">iPhone / Mac で登録</a>
+    ・ <a href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">Googleカレンダーで登録</a>
+    <details><summary>うまく登録できないとき</summary>
+      <ol>
+        <li>Googleカレンダー(パソコン): 左の「他のカレンダー」の＋ →「URLで追加」に次のURLを貼り付け<br><code>https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code></li>
+        <li>予定は毎日自動で入れ替わります(Google側の反映は半日〜1日ほど遅れることがあります)。1件だけ追加したいときは、各カードの「Googleカレンダーに追加」を使ってください。</li>
+      </ol>
+    </details>
+  </div>
   {quick}
   {sections}
   <footer>
@@ -293,6 +431,7 @@ def main():
         sections=sections,
     )
     OUTPUT_PATH.write_text(output, encoding="utf-8")
+    ICS_PATH.write_bytes(build_ics(groups).encode("utf-8"))
     print(f"Wrote {OUTPUT_PATH} ({total} upcoming events, {len(ordered_categories)} categories)")
 
 
