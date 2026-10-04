@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//kokugo-kenkyukai-info//JA
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Tokyo
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0900
+TZOFFSETTO:+0900
+TZNAME:JST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:ec2ff1995cfbec82ada1@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261017T153000
+DTEND;TZID=Asia/Tokyo:20261017T183000
+SUMMARY:国語教育史と実践に学ぶ会 第253回研究会
+DESCRIPTION:時間: 15:30〜18:30\n申込締切: 2026-10-12\n申込方法: 
+ 美谷島秀明先生へメール: biyajima@waseda.jp ／ 出席フォー
+ ム: https://forms.cloud.microsoft/r/LG1BuFM5QH (10/12まで)\n一覧: htt
+ ps://upopotennis-gif.github.io/kokugo-kenkyukai-info/
+END:VEVENT
+END:VCALENDAR

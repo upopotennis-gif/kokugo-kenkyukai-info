@@ -59,9 +59,13 @@
     word-break:break-all;}
   .card-src a{color:var(--muted);}
   .gcal{font-size:11.5px;margin:6px 0 0;}
-  .gcal a{color:var(--indigo);}
+  .gcal a{color:var(--indigo);margin-right:12px;white-space:nowrap;}
   .subscribe{background:var(--indigo-soft);border:1px solid var(--rule);border-radius:6px;
     padding:12px 16px;margin:0 0 28px;font-size:13.5px;}
+  .sub-btns{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px;}
+  .btn{display:inline-block;padding:8px 16px;border-radius:6px;background:var(--indigo);color:var(--paper-raised);
+    font-weight:600;font-size:13.5px;text-decoration:none;}
+  .subscribe details summary{cursor:pointer;color:var(--muted);font-size:12.5px;margin-top:8px;}
   .subscribe ul{margin:8px 0 0;padding-left:1.4em;font-size:12.5px;color:var(--muted);}
   .subscribe li{margin:3px 0;}
   .sub-url{margin:8px 0 0;}
@@ -81,15 +85,21 @@
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全22件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
   <div class="subscribe">
-    <strong>📅 カレンダーに登録</strong>(購読すると、予定の追加・変更が自動で反映されます)
-    <p class="sub-url"><code id="ics-url">https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code>
-      <button type="button" id="ics-copy">URLをコピー</button></p>
-    <ul>
-      <li><strong>iPhone / iPad</strong>: 「設定」→「カレンダー」→「アカウント」→「アカウントを追加」→「その他」→「照会するカレンダーを追加」→ コピーしたURLを貼り付けて「次へ」→「保存」</li>
-      <li><strong>Mac のカレンダー</strong>: メニュー「ファイル」→「新規カレンダー照会…」→ URLを貼り付けて「照会」→ 自動更新を「1日」などに設定</li>
-      <li><strong>Googleカレンダー</strong>: <a href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">ここから登録</a>(パソコンでは「他のカレンダー」の＋→「URLで追加」でも可)</li>
-      <li>購読せず、いまの予定だけ取り込むなら <a href="calendar.ics" download>calendar.ics をダウンロード</a>(あとの変更は反映されません)</li>
-    </ul>
+    <strong>📅 カレンダーに登録</strong>(登録すると、予定の追加・変更が自動で反映されます)
+    <p class="sub-btns">
+      <a class="btn" href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">Googleカレンダーに登録</a>
+      <a class="btn" href="webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics">Appleカレンダー(iPhone・Mac)に登録</a>
+    </p>
+    <details>
+      <summary>ボタンで進まないとき(Apple カレンダー)</summary>
+      <p class="sub-url"><code id="ics-url">https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code>
+        <button type="button" id="ics-copy">URLをコピー</button></p>
+      <ul>
+        <li><strong>Mac</strong>: 「カレンダー」アプリのメニュー「ファイル」→「新規カレンダー照会…」→ URLを貼り付けて「照会」</li>
+        <li><strong>iPhone / iPad</strong>: 「設定」→「カレンダー」→「アカウント」→「アカウントを追加」→「その他」→「照会するカレンダーを追加」→ URLを貼り付けて「次へ」→「保存」</li>
+        <li>1件だけ追加したいときは、下の各予定の「Apple・Outlook用(.ics)」を押してください(自動更新はされません)。</li>
+      </ul>
+    </details>
     <script>
       document.getElementById("ics-copy").addEventListener("click", function () {
         var url = document.getElementById("ics-url").textContent, btn = this;
@@ -137,7 +147,8 @@
       
       
       <p class="card-src">情報源: <a href="https://assoc-w-kokukyou.w.waseda.jp/">https://assoc-w-kokukyou.w.waseda.jp/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A9%E7%A8%B2%E7%94%B0%E5%A4%A7%E5%AD%A6%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+2026%E5%B9%B4%E5%BA%A6%E7%A7%8B%E5%AD%A3%E4%BE%8B%E4%BC%9A%EF%BC%88%E7%AC%AC309%E5%9B%9E%E3%83%BB%E7%AC%AC20%E5%9B%9E%E5%AD%A6%E7%94%9F%E4%BC%9A%E5%93%A1%E7%A0%94%E7%A9%B6%E7%99%BA%E8%A1%A8%E4%BC%9A%EF%BC%89&amp;dates=20261031T130000%2F20261031T140000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C+%28%E5%AF%BE%E9%9D%A2+12%3A30%E9%96%8B%E5%A0%B4%29%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fassoc-w-kokukyou.w.waseda.jp%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A9%E7%A8%B2%E7%94%B0%E5%A4%A7%E5%AD%A6%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+2026%E5%B9%B4%E5%BA%A6%E7%A7%8B%E5%AD%A3%E4%BE%8B%E4%BC%9A%EF%BC%88%E7%AC%AC309%E5%9B%9E%E3%83%BB%E7%AC%AC20%E5%9B%9E%E5%AD%A6%E7%94%9F%E4%BC%9A%E5%93%A1%E7%A0%94%E7%A9%B6%E7%99%BA%E8%A1%A8%E4%BC%9A%EF%BC%89&amp;dates=20261031T130000%2F20261031T140000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C+%28%E5%AF%BE%E9%9D%A2+12%3A30%E9%96%8B%E5%A0%B4%29%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fassoc-w-kokukyou.w.waseda.jp%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/3902ff30509ec4034f27.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -151,7 +162,8 @@
       
       
       <p class="card-src">情報源: <a href="https://www.jtsj.org/taikai">https://www.jtsj.org/taikai</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E7%A7%8B%E5%AD%A3%E5%A4%A7%E4%BC%9A%EF%BC%88%E9%B3%A5%E5%8F%96%E5%A4%A7%E4%BC%9A%EF%BC%89&amp;dates=20261024%2F20261026&amp;details=%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fwww.jtsj.org%2Ftaikai%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E7%A7%8B%E5%AD%A3%E5%A4%A7%E4%BC%9A%EF%BC%88%E9%B3%A5%E5%8F%96%E5%A4%A7%E4%BC%9A%EF%BC%89&amp;dates=20261024%2F20261026&amp;details=%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fwww.jtsj.org%2Ftaikai%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/16de0047061577e8957f.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -165,7 +177,8 @@
       
       
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E6%96%B0%E6%BD%9F%E6%94%AF%E9%83%A8%E7%B7%8F%E4%BC%9A%E3%83%BB%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261004T130000%2F20261004T163000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C16%3A30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E6%96%B0%E6%BD%9F%E6%94%AF%E9%83%A8%E7%B7%8F%E4%BC%9A%E3%83%BB%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261004T130000%2F20261004T163000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C16%3A30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/a93fdc2d4d598a44908b.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev4">
@@ -174,7 +187,8 @@
       
       
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E4%BC%81%E7%94%BB%E3%83%BB%E6%83%85%E5%A0%B1%E9%83%A8%E4%B8%BB%E5%82%AC+%E5%9B%BD%E8%AA%9E%E6%8E%88%E6%A5%AD%E5%8A%9B%E3%82%A2%E3%83%83%E3%83%97%E3%81%B8%E3%81%AE%E5%AE%9F%E8%B7%B5%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC&amp;dates=20261004T140000%2F20261004T163000&amp;details=%E6%99%82%E9%96%93%3A+14%3A00%E3%80%9C16%3A30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E4%BC%81%E7%94%BB%E3%83%BB%E6%83%85%E5%A0%B1%E9%83%A8%E4%B8%BB%E5%82%AC+%E5%9B%BD%E8%AA%9E%E6%8E%88%E6%A5%AD%E5%8A%9B%E3%82%A2%E3%83%83%E3%83%97%E3%81%B8%E3%81%AE%E5%AE%9F%E8%B7%B5%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC&amp;dates=20261004T140000%2F20261004T163000&amp;details=%E6%99%82%E9%96%93%3A+14%3A00%E3%80%9C16%3A30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/f7fac1eaccd50bdc9073.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev5">
@@ -183,7 +197,8 @@
       
       
       <p class="card-src">情報源: <a href="http://nikkokug.org/">http://nikkokug.org/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E5%92%8C%E6%AD%8C%E5%B1%B1%E5%9C%B0%E5%8C%BA%E7%A0%94%E7%A9%B6%E9%9B%86%E4%BC%9A&amp;dates=20261010T125000%2F20261010T170000&amp;details=%E6%99%82%E9%96%93%3A+12%3A50%E3%80%9C17%3A00%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E5%92%8C%E6%AD%8C%E5%B1%B1%E5%9C%B0%E5%8C%BA%E7%A0%94%E7%A9%B6%E9%9B%86%E4%BC%9A&amp;dates=20261010T125000%2F20261010T170000&amp;details=%E6%99%82%E9%96%93%3A+12%3A50%E3%80%9C17%3A00%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/a362b3ee4bd5e5949663.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev6">
@@ -192,7 +207,8 @@
       <p class="deadline">締切 2026-10-30</p>
       
       <p class="card-src">情報源: <a href="http://nikkokug.org/bukai.html">http://nikkokug.org/bukai.html</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E4%B8%AD%E5%AD%A6%E6%A0%A1%E9%83%A8%E4%BC%9A%E5%85%AC%E9%96%8B%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261031T140000%2F20261031T163000&amp;details=%E6%99%82%E9%96%93%3A+14%3A00%E3%80%9C16%3A30%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2Fbukai.html%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E4%B8%AD%E5%AD%A6%E6%A0%A1%E9%83%A8%E4%BC%9A%E5%85%AC%E9%96%8B%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261031T140000%2F20261031T163000&amp;details=%E6%99%82%E9%96%93%3A+14%3A00%E3%80%9C16%3A30%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnikkokug.org%2Fbukai.html%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/ad9af415c6817626e393.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev7">
@@ -201,7 +217,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E9%83%A8%E4%BC%9A+%E7%AC%AC90%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261107T143000%2F20261107T173000&amp;details=%E6%99%82%E9%96%93%3A+14%3A30%E3%80%9C17%3A30%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E9%83%A8%E4%BC%9A+%E7%AC%AC90%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261107T143000%2F20261107T173000&amp;details=%E6%99%82%E9%96%93%3A+14%3A30%E3%80%9C17%3A30%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/e59760bf6b5229cb5857.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -215,7 +232,8 @@
       <p class="deadline">締切 2026-12-31</p>
       
       <p class="card-src">情報源: <a href="https://www.zenkankyo.gr.jp/info/info_society/1812/">https://www.zenkankyo.gr.jp/info/info_society/1812/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%85%A8%E5%9B%BD%E6%BC%A2%E6%96%87%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E7%AC%AC42%E5%9B%9E%EF%BC%88%E9%80%9A%E7%AE%9772%E5%9B%9E%EF%BC%89%E5%A4%A7%E4%BC%9A&amp;dates=20270619%2F20270620&amp;details=%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-12-31%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fwww.zenkankyo.gr.jp%2Finfo%2Finfo_society%2F1812%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%85%A8%E5%9B%BD%E6%BC%A2%E6%96%87%E6%95%99%E8%82%B2%E5%AD%A6%E4%BC%9A+%E7%AC%AC42%E5%9B%9E%EF%BC%88%E9%80%9A%E7%AE%9772%E5%9B%9E%EF%BC%89%E5%A4%A7%E4%BC%9A&amp;dates=20270619%2F20270620&amp;details=%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-12-31%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fwww.zenkankyo.gr.jp%2Finfo%2Finfo_society%2F1812%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/d4dd3aaa72aa400e2db7.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -229,7 +247,8 @@
       <p class="deadline">締切 2026-09-30</p>
       
       <p class="card-src">情報源: <a href="https://omurahama-kokugo.com/">https://omurahama-kokugo.com/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%A4%A7%E6%9D%91%E3%81%AF%E3%81%BE%E7%94%9F%E8%AA%95120%E5%B9%B4%E8%A8%98%E5%BF%B5%E7%A0%94%E7%A9%B6%E5%A4%A7%E4%BC%9A+%E6%A8%AA%E6%B5%9C%E5%A4%A7%E4%BC%9A&amp;dates=20261010T100000%2F20261010T165000&amp;details=%E6%99%82%E9%96%93%3A+10%3A00%E3%80%9C16%3A50+%28%E5%8F%97%E4%BB%98+9%3A30%29%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-09-30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fomurahama-kokugo.com%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%A4%A7%E6%9D%91%E3%81%AF%E3%81%BE%E7%94%9F%E8%AA%95120%E5%B9%B4%E8%A8%98%E5%BF%B5%E7%A0%94%E7%A9%B6%E5%A4%A7%E4%BC%9A+%E6%A8%AA%E6%B5%9C%E5%A4%A7%E4%BC%9A&amp;dates=20261010T100000%2F20261010T165000&amp;details=%E6%99%82%E9%96%93%3A+10%3A00%E3%80%9C16%3A50+%28%E5%8F%97%E4%BB%98+9%3A30%29%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-09-30%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fomurahama-kokugo.com%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/7e3adfe7b4729e0e5a6f.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -243,7 +262,8 @@
       
       
       <p class="card-src">情報源: <a href="https://ed-asso.jp/">https://ed-asso.jp/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%95%99%E8%82%B2%E9%96%A2%E9%80%A3%E5%AD%A6%E4%BC%9A%E9%80%A3%E7%B5%A1%E5%8D%94%E8%AD%B0%E4%BC%9A+%E7%AC%AC25%E5%9B%9E%E3%82%A2%E3%82%B8%E3%82%A2AHRD%E5%A4%A7%E4%BC%9A&amp;dates=20261105%2F20261109&amp;details=%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fed-asso.jp%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%95%99%E8%82%B2%E9%96%A2%E9%80%A3%E5%AD%A6%E4%BC%9A%E9%80%A3%E7%B5%A1%E5%8D%94%E8%AD%B0%E4%BC%9A+%E7%AC%AC25%E5%9B%9E%E3%82%A2%E3%82%B8%E3%82%A2AHRD%E5%A4%A7%E4%BC%9A&amp;dates=20261105%2F20261109&amp;details=%E6%83%85%E5%A0%B1%E6%BA%90%3A+https%3A%2F%2Fed-asso.jp%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/0bccf8dee002f471035a.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -257,7 +277,8 @@
       <p class="deadline">締切 2026-10-12</p>
       <p class="apply">申込方法 美谷島秀明先生へメール: <a href="mailto:biyajima@waseda.jp">biyajima@waseda.jp</a> ／ 出席フォーム: <a href="https://forms.cloud.microsoft/r/LG1BuFM5QH">https://forms.cloud.microsoft/r/LG1BuFM5QH</a> (10/12まで)</p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC253%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261017T153000%2F20261017T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-12%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp+%EF%BC%8F+%E5%87%BA%E5%B8%AD%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%3A+https%3A%2F%2Fforms.cloud.microsoft%2Fr%2FLG1BuFM5QH+%2810%2F12%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC253%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261017T153000%2F20261017T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-12%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp+%EF%BC%8F+%E5%87%BA%E5%B8%AD%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%3A+https%3A%2F%2Fforms.cloud.microsoft%2Fr%2FLG1BuFM5QH+%2810%2F12%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/ec2ff1995cfbec82ada1.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev12">
@@ -266,7 +287,8 @@
       
       <p class="apply">申込方法 美谷島秀明先生へメール: <a href="mailto:biyajima@waseda.jp">biyajima@waseda.jp</a></p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC254%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261121T153000%2F20261121T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC254%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261121T153000%2F20261121T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/5463ce3021a3e8dd5915.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev13">
@@ -275,7 +297,8 @@
       
       <p class="apply">申込方法 美谷島秀明先生へメール: <a href="mailto:biyajima@waseda.jp">biyajima@waseda.jp</a></p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC255%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261226T153000%2F20261226T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC255%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20261226T153000%2F20261226T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/fbb8790e6555c46dd2eb.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev14">
@@ -284,7 +307,8 @@
       
       <p class="apply">申込方法 美谷島秀明先生へメール: <a href="mailto:biyajima@waseda.jp">biyajima@waseda.jp</a></p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC256%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20270327T153000%2F20270327T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E5%8F%B2%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%81%AB%E5%AD%A6%E3%81%B6%E4%BC%9A+%E7%AC%AC256%E5%9B%9E%E7%A0%94%E7%A9%B6%E4%BC%9A&amp;dates=20270327T153000%2F20270327T183000&amp;details=%E6%99%82%E9%96%93%3A+15%3A30%E3%80%9C18%3A30%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%BE%8E%E8%B0%B7%E5%B3%B6%E7%A7%80%E6%98%8E%E5%85%88%E7%94%9F%E3%81%B8%E3%83%A1%E3%83%BC%E3%83%AB%3A+biyajima%40waseda.jp%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/9c5d46bf1e4c28e7d15c.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -298,7 +322,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9C%8B%E6%96%87%E5%AD%B8%E6%9C%83+%E7%A7%8B%E5%AD%A3%E5%A4%A7%E4%BC%9A&amp;dates=20261121%2F20261123&amp;details=%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9C%8B%E6%96%87%E5%AD%B8%E6%9C%83+%E7%A7%8B%E5%AD%A3%E5%A4%A7%E4%BC%9A&amp;dates=20261121%2F20261123&amp;details=%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/402591a2151d75e83c1e.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -312,7 +337,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC57%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20261114T170000%2F20261114T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC57%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20261114T170000%2F20261114T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/795065a5a5edc60993b8.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev17">
@@ -321,7 +347,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC14%E5%9B%9E%E5%A4%A7%E4%BC%9A&amp;dates=20261212%2F20261213&amp;details=%E6%99%82%E9%96%93%3A+%E5%8D%88%E5%BE%8C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC14%E5%9B%9E%E5%A4%A7%E4%BC%9A&amp;dates=20261212%2F20261213&amp;details=%E6%99%82%E9%96%93%3A+%E5%8D%88%E5%BE%8C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/d4a81033edb4e01d7110.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev18">
@@ -330,7 +357,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC58%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20270130T170000%2F20270130T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC58%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20270130T170000%2F20270130T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/c562e6298cfa2f2d4486.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev19">
@@ -339,7 +367,8 @@
       
       
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC59%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20270313T170000%2F20270313T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E5%9C%8B%E5%AD%B8%E9%99%A2%E5%A4%A7%E5%AD%B8%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC59%E5%9B%9E%E6%9C%88%E4%BE%8B%E4%BC%9A&amp;dates=20270313T170000%2F20270313T180000&amp;details=%E6%99%82%E9%96%93%3A+17%3A00%E3%80%9C%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/af594309af7003acc35b.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -353,7 +382,8 @@
       
       <p class="apply">申込方法 日本文学協会のサイトから: <a href="http://nihonbungaku.server-shared.com/">http://nihonbungaku.server-shared.com/</a></p>
       <p class="card-src">情報源: <a href="http://nihonbungaku.server-shared.com/">http://nihonbungaku.server-shared.com/</a></p>
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6%E5%8D%94%E4%BC%9A+11%E6%9C%88%E4%BE%8B%E4%BC%9A%EF%BC%88%E3%82%B7%E3%83%B3%E3%83%9D%E3%82%B8%E3%82%A6%E3%83%A0%EF%BC%89&amp;dates=20261129T130000%2F20261129T140000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C+%2812%3A30%E5%8F%97%E4%BB%98%29%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6%E5%8D%94%E4%BC%9A%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%8B%E3%82%89%3A+http%3A%2F%2Fnihonbungaku.server-shared.com%2F%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnihonbungaku.server-shared.com%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6%E5%8D%94%E4%BC%9A+11%E6%9C%88%E4%BE%8B%E4%BC%9A%EF%BC%88%E3%82%B7%E3%83%B3%E3%83%9D%E3%82%B8%E3%82%A6%E3%83%A0%EF%BC%89&amp;dates=20261129T130000%2F20261129T140000&amp;details=%E6%99%82%E9%96%93%3A+13%3A00%E3%80%9C+%2812%3A30%E5%8F%97%E4%BB%98%29%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6%E5%8D%94%E4%BC%9A%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%8B%E3%82%89%3A+http%3A%2F%2Fnihonbungaku.server-shared.com%2F%0A%E6%83%85%E5%A0%B1%E6%BA%90%3A+http%3A%2F%2Fnihonbungaku.server-shared.com%2F%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/bedf4db96dee153611bd.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>
@@ -367,7 +397,8 @@
       <p class="deadline">締切 2026-10-31</p>
       <p class="apply">申込方法 申込フォーム: <a href="https://forms.gle/nExZx938MWRCcS9G9">https://forms.gle/nExZx938MWRCcS9G9</a> (10/31 18:00まで)</p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%AC%AC46%E5%9B%9E%E4%BB%8A%E6%97%A5%E3%82%82%E6%98%8E%E6%97%A5%E3%82%82%E6%8E%88%E6%A5%AD%E9%81%93%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%A4%E6%B5%81%E4%BC%9A%EF%BC%88%E7%94%9F%E6%88%90AI%C3%97%E6%96%87%E5%AD%A6%EF%BC%89&amp;dates=20261031T210000%2F20261031T223000&amp;details=%E6%99%82%E9%96%93%3A+21%3A00%E3%80%9C22%3A30+%28%E5%B8%8C%E6%9C%9B%E8%80%85%E3%81%AF23%3A00%E3%81%BE%E3%81%A7%29%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-31%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%94%B3%E8%BE%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%3A+https%3A%2F%2Fforms.gle%2FnExZx938MWRCcS9G9+%2810%2F31+18%3A00%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E7%AC%AC46%E5%9B%9E%E4%BB%8A%E6%97%A5%E3%82%82%E6%98%8E%E6%97%A5%E3%82%82%E6%8E%88%E6%A5%AD%E9%81%93%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E4%BA%A4%E6%B5%81%E4%BC%9A%EF%BC%88%E7%94%9F%E6%88%90AI%C3%97%E6%96%87%E5%AD%A6%EF%BC%89&amp;dates=20261031T210000%2F20261031T223000&amp;details=%E6%99%82%E9%96%93%3A+21%3A00%E3%80%9C22%3A30+%28%E5%B8%8C%E6%9C%9B%E8%80%85%E3%81%AF23%3A00%E3%81%BE%E3%81%A7%29%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-10-31%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%94%B3%E8%BE%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%3A+https%3A%2F%2Fforms.gle%2FnExZx938MWRCcS9G9+%2810%2F31+18%3A00%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/c9c4f64865225e2b8bb6.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
 
     <article class="card" id="ev22">
@@ -376,7 +407,8 @@
       <p class="deadline">締切 2026-11-13</p>
       <p class="apply">申込方法 申込フォーム(懇親会の申込も同フォーム): <a href="https://forms.gle/d3KLt1HJkoQXzyRU8">https://forms.gle/d3KLt1HJkoQXzyRU8</a> (11/13まで)</p>
       
-      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E9%AB%98%E6%A0%A1%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC36%E5%9B%9E%E4%BE%8B%E4%BC%9A&amp;dates=20261122T150000%2F20261122T160000&amp;details=%E6%99%82%E9%96%93%3A+15%3A00%E3%81%94%E3%82%8D%E3%80%9C%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-11-13%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%94%B3%E8%BE%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%28%E6%87%87%E8%A6%AA%E4%BC%9A%E3%81%AE%E7%94%B3%E8%BE%BC%E3%82%82%E5%90%8C%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%29%3A+https%3A%2F%2Fforms.gle%2Fd3KLt1HJkoQXzyRU8+%2811%2F13%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E9%AB%98%E6%A0%A1%E5%9B%BD%E8%AA%9E%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E4%BC%9A+%E7%AC%AC36%E5%9B%9E%E4%BE%8B%E4%BC%9A&amp;dates=20261122T150000%2F20261122T160000&amp;details=%E6%99%82%E9%96%93%3A+15%3A00%E3%81%94%E3%82%8D%E3%80%9C%0A%E7%94%B3%E8%BE%BC%E7%B7%A0%E5%88%87%3A+2026-11-13%0A%E7%94%B3%E8%BE%BC%E6%96%B9%E6%B3%95%3A+%E7%94%B3%E8%BE%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%28%E6%87%87%E8%A6%AA%E4%BC%9A%E3%81%AE%E7%94%B3%E8%BE%BC%E3%82%82%E5%90%8C%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%29%3A+https%3A%2F%2Fforms.gle%2Fd3KLt1HJkoQXzyRU8+%2811%2F13%E3%81%BE%E3%81%A7%29%0A%E4%B8%80%E8%A6%A7%3A+https%3A%2F%2Fupopotennis-gif.github.io%2Fkokugo-kenkyukai-info%2F&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/f58d732429f461849008.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>
       </div>
     </section>

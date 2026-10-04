@@ -26,6 +26,7 @@ ROOT = Path(__file__).parent
 EVENTS_PATH = ROOT / "events.json"
 OUTPUT_PATH = ROOT / "index.html"
 ICS_PATH = ROOT / "calendar.ics"
+ICS_DIR = ROOT / "ics"
 SITE_URL = "https://upopotennis-gif.github.io/kokugo-kenkyukai-info/"
 
 # カテゴリ判定ルール(先にマッチしたものを採用)。イベント名に含まれるキーワードで判定する。
@@ -162,7 +163,8 @@ def render_card(ev) -> str:
       {deadline_html}
       {apply_html}
       {src_html}
-      <p class="gcal"><a href="{html.escape(gcal_link(ev))}" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a></p>
+      <p class="gcal"><a href="{html.escape(gcal_link(ev))}" target="_blank" rel="noopener">＋ Googleカレンダーに追加</a>
+        <a href="ics/{event_uid(ev)}.ics">＋ Apple・Outlook用(.ics)</a></p>
     </article>"""
 
 
@@ -238,21 +240,43 @@ def _ics_fold(line: str) -> str:
     return "\r\n".join(out)
 
 
-def build_ics(groups) -> str:
-    evs = sorted(
-        (e for g in groups.values() for e in g),
-        key=lambda e: (e["_start"], e["_end"], e["name"]),
-    )
+def event_uid(e) -> str:
+    return hashlib.sha1((e["name"] + e.get("eventDate", "")).encode("utf-8")).hexdigest()[:20]
+
+
+def _vevent_lines(e):
+    allday, s, en = event_span(e)
+    lines = ["BEGIN:VEVENT", f"UID:{event_uid(e)}@kokugo-kenkyukai-info",
+             "DTSTAMP:20260101T000000Z"]
+    if allday:
+        lines += [f"DTSTART;VALUE=DATE:{s.strftime('%Y%m%d')}",
+                  f"DTEND;VALUE=DATE:{en.strftime('%Y%m%d')}"]
+    else:
+        lines += [f"DTSTART;TZID=Asia/Tokyo:{s.strftime('%Y%m%dT%H%M%S')}",
+                  f"DTEND;TZID=Asia/Tokyo:{en.strftime('%Y%m%dT%H%M%S')}"]
+    lines += [f"SUMMARY:{_ics_escape(e['name'])}",
+              f"DESCRIPTION:{_ics_escape(event_details(e))}",
+              "END:VEVENT"]
+    return lines
+
+
+def _ics_calendar(evs, calname=None) -> str:
+    """calname を渡すと購読フィード用(名前・更新間隔つき)。なければ1件取り込み用。"""
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//kokugo-kenkyukai-info//JA",
         "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "X-WR-CALNAME:国語科 学会・研究会",
-        "X-WR-TIMEZONE:Asia/Tokyo",
-        "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
-        "X-PUBLISHED-TTL:PT12H",
+    ]
+    if calname:
+        lines += [
+            "METHOD:PUBLISH",
+            f"X-WR-CALNAME:{_ics_escape(calname)}",
+            "X-WR-TIMEZONE:Asia/Tokyo",
+            "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
+            "X-PUBLISHED-TTL:PT12H",
+        ]
+    lines += [
         "BEGIN:VTIMEZONE",
         "TZID:Asia/Tokyo",
         "BEGIN:STANDARD",
@@ -264,21 +288,31 @@ def build_ics(groups) -> str:
         "END:VTIMEZONE",
     ]
     for e in evs:
-        allday, s, en = event_span(e)
-        uid = hashlib.sha1((e["name"] + e.get("eventDate", "")).encode("utf-8")).hexdigest()[:20]
-        lines += ["BEGIN:VEVENT", f"UID:{uid}@kokugo-kenkyukai-info",
-                  "DTSTAMP:20260101T000000Z"]
-        if allday:
-            lines += [f"DTSTART;VALUE=DATE:{s.strftime('%Y%m%d')}",
-                      f"DTEND;VALUE=DATE:{en.strftime('%Y%m%d')}"]
-        else:
-            lines += [f"DTSTART;TZID=Asia/Tokyo:{s.strftime('%Y%m%dT%H%M%S')}",
-                      f"DTEND;TZID=Asia/Tokyo:{en.strftime('%Y%m%dT%H%M%S')}"]
-        lines += [f"SUMMARY:{_ics_escape(e['name'])}",
-                  f"DESCRIPTION:{_ics_escape(event_details(e))}",
-                  "END:VEVENT"]
+        lines += _vevent_lines(e)
     lines.append("END:VCALENDAR")
     return "\r\n".join(_ics_fold(l) for l in lines) + "\r\n"
+
+
+def build_ics(groups) -> str:
+    evs = sorted(
+        (e for g in groups.values() for e in g),
+        key=lambda e: (e["_start"], e["_end"], e["name"]),
+    )
+    return _ics_calendar(evs, "国語科 学会・研究会")
+
+
+def write_event_ics(groups):
+    """予定ごとの .ics(1件だけカレンダーに追加したい人向け)を ics/ に書き出し、不要になったものは消す。"""
+    ICS_DIR.mkdir(exist_ok=True)
+    keep = set()
+    for g in groups.values():
+        for e in g:
+            name = f"{event_uid(e)}.ics"
+            keep.add(name)
+            (ICS_DIR / name).write_bytes(_ics_calendar([e]).encode("utf-8"))
+    for f in ICS_DIR.glob("*.ics"):
+        if f.name not in keep:
+            f.unlink()
 
 
 def render_quick_table(groups) -> str:
@@ -372,9 +406,13 @@ TEMPLATE = """<!doctype html>
     word-break:break-all;}}
   .card-src a{{color:var(--muted);}}
   .gcal{{font-size:11.5px;margin:6px 0 0;}}
-  .gcal a{{color:var(--indigo);}}
+  .gcal a{{color:var(--indigo);margin-right:12px;white-space:nowrap;}}
   .subscribe{{background:var(--indigo-soft);border:1px solid var(--rule);border-radius:6px;
     padding:12px 16px;margin:0 0 28px;font-size:13.5px;}}
+  .sub-btns{{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px;}}
+  .btn{{display:inline-block;padding:8px 16px;border-radius:6px;background:var(--indigo);color:var(--paper-raised);
+    font-weight:600;font-size:13.5px;text-decoration:none;}}
+  .subscribe details summary{{cursor:pointer;color:var(--muted);font-size:12.5px;margin-top:8px;}}
   .subscribe ul{{margin:8px 0 0;padding-left:1.4em;font-size:12.5px;color:var(--muted);}}
   .subscribe li{{margin:3px 0;}}
   .sub-url{{margin:8px 0 0;}}
@@ -394,15 +432,21 @@ TEMPLATE = """<!doctype html>
   </header>
   <p class="lede">高校国語科向けに、学会公式サイトおよびメール案内から収集した今後開催予定のイベント一覧です(全{total}件)。Notionデータベースで重複チェックのうえ自動更新しています。</p>
   <div class="subscribe">
-    <strong>📅 カレンダーに登録</strong>(購読すると、予定の追加・変更が自動で反映されます)
-    <p class="sub-url"><code id="ics-url">https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code>
-      <button type="button" id="ics-copy">URLをコピー</button></p>
-    <ul>
-      <li><strong>iPhone / iPad</strong>: 「設定」→「カレンダー」→「アカウント」→「アカウントを追加」→「その他」→「照会するカレンダーを追加」→ コピーしたURLを貼り付けて「次へ」→「保存」</li>
-      <li><strong>Mac のカレンダー</strong>: メニュー「ファイル」→「新規カレンダー照会…」→ URLを貼り付けて「照会」→ 自動更新を「1日」などに設定</li>
-      <li><strong>Googleカレンダー</strong>: <a href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">ここから登録</a>(パソコンでは「他のカレンダー」の＋→「URLで追加」でも可)</li>
-      <li>購読せず、いまの予定だけ取り込むなら <a href="calendar.ics" download>calendar.ics をダウンロード</a>(あとの変更は反映されません)</li>
-    </ul>
+    <strong>📅 カレンダーに登録</strong>(登録すると、予定の追加・変更が自動で反映されます)
+    <p class="sub-btns">
+      <a class="btn" href="https://calendar.google.com/calendar/r?cid=webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics" target="_blank" rel="noopener">Googleカレンダーに登録</a>
+      <a class="btn" href="webcal://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics">Appleカレンダー(iPhone・Mac)に登録</a>
+    </p>
+    <details>
+      <summary>ボタンで進まないとき(Apple カレンダー)</summary>
+      <p class="sub-url"><code id="ics-url">https://upopotennis-gif.github.io/kokugo-kenkyukai-info/calendar.ics</code>
+        <button type="button" id="ics-copy">URLをコピー</button></p>
+      <ul>
+        <li><strong>Mac</strong>: 「カレンダー」アプリのメニュー「ファイル」→「新規カレンダー照会…」→ URLを貼り付けて「照会」</li>
+        <li><strong>iPhone / iPad</strong>: 「設定」→「カレンダー」→「アカウント」→「アカウントを追加」→「その他」→「照会するカレンダーを追加」→ URLを貼り付けて「次へ」→「保存」</li>
+        <li>1件だけ追加したいときは、下の各予定の「Apple・Outlook用(.ics)」を押してください(自動更新はされません)。</li>
+      </ul>
+    </details>
     <script>
       document.getElementById("ics-copy").addEventListener("click", function () {{
         var url = document.getElementById("ics-url").textContent, btn = this;
@@ -443,6 +487,7 @@ def main():
     )
     OUTPUT_PATH.write_text(output, encoding="utf-8")
     ICS_PATH.write_bytes(build_ics(groups).encode("utf-8"))
+    write_event_ics(groups)
     print(f"Wrote {OUTPUT_PATH} ({total} upcoming events, {len(ordered_categories)} categories)")
 
 

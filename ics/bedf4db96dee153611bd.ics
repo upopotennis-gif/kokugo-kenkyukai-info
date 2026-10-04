@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//kokugo-kenkyukai-info//JA
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Tokyo
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0900
+TZOFFSETTO:+0900
+TZNAME:JST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:bedf4db96dee153611bd@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261129T130000
+DTEND;TZID=Asia/Tokyo:20261129T140000
+SUMMARY:日本文学協会 11月例会（シンポジウム）
+DESCRIPTION:時間: 13:00〜 (12:30受付)\n申込方法: 日本文学協
+ 会のサイトから: http://nihonbungaku.server-shared.com/\n情報源: 
+ http://nihonbungaku.server-shared.com/\n一覧: https://upopotennis-gif.gi
+ thub.io/kokugo-kenkyukai-info/
+END:VEVENT
+END:VCALENDAR
