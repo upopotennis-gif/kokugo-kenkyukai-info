@@ -144,7 +144,7 @@ def render_card(ev) -> str:
         if url else ""
     )
     apply = (ev.get("apply") or "").strip()
-    apply_html = f'<p class="apply">申込 {autolink(apply)}</p>' if apply else ""
+    apply_html = f'<p class="apply">申込方法 {autolink(apply)}</p>' if apply else ""
     return f"""
     <article class="card">
       <p class="card-when">{html.escape(when)}</p>
