@@ -65,7 +65,11 @@ def parse_dates(event_date: str):
 
 def load_events():
     with open(EVENTS_PATH, encoding="utf-8") as f:
-        return json.load(f)
+        events = json.load(f)
+    # hidden.json: サイトに出さないイベント名の一覧(Notionには残す)
+    hidden_path = ROOT / "hidden.json"
+    hidden = set(json.load(open(hidden_path, encoding="utf-8"))) if hidden_path.exists() else set()
+    return [e for e in events if e.get("name") not in hidden]
 
 
 def build(today: datetime.date):
