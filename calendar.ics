@@ -116,6 +116,16 @@ DESCRIPTION:時間: 17:00〜\n一覧: https://upopotennis-gif.github.io/kok
  ugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
+UID:570a270f4f41cc544ae8@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261114T140000
+DTEND;TZID=Asia/Tokyo:20261114T160000
+SUMMARY:日本国語教育学会 山形支部研究会
+DESCRIPTION:時間: 14:00〜16:00\n情報源: http://nikkokug.org/posts/act
+ ivity1.html\n一覧: https://upopotennis-gif.github.io/kokugo-kenkyukai-in
+ fo/
+END:VEVENT
+BEGIN:VEVENT
 UID:5463ce3021a3e8dd5915@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20261121T153000
@@ -143,6 +153,16 @@ SUMMARY:これからの高校国語教育研究会 第36回例会
 DESCRIPTION:時間: 15:00ごろ〜\n申込締切: 2026-11-13\n申込方法:
   申込フォーム(懇親会の申込も同フォーム): https://forms.g
  le/d3KLt1HJkoQXzyRU8 (11/13まで)\n一覧: https://upopotennis-gif.github
+ .io/kokugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
+UID:6c967ba9f41f0b4bd70b@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261128T150000
+DTEND;TZID=Asia/Tokyo:20261128T173000
+SUMMARY:日本国語教育学会 大学部会 第2回研究会
+DESCRIPTION:時間: 15:00〜17:30\n申込締切: 2026-11-25\n情報源: htt
+ p://nikkokug.org/posts/bukai6.html\n一覧: https://upopotennis-gif.github
  .io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
