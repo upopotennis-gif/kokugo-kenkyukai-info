@@ -17,25 +17,6 @@ TZNAME:JST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:f7fac1eaccd50bdc9073@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261004T140000
-DTEND;TZID=Asia/Tokyo:20261004T163000
-SUMMARY:日本国語教育学会 企画・情報部主催 国語授業力
- アップへの実践セミナー
-DESCRIPTION:時間: 14:00〜16:30\n情報源: http://nikkokug.org/\n一覧:
-  https://upopotennis-gif.github.io/kokugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
-UID:a93fdc2d4d598a44908b@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261004T130000
-DTEND;TZID=Asia/Tokyo:20261004T163000
-SUMMARY:日本国語教育学会 新潟支部総会・研究会
-DESCRIPTION:時間: 13:00〜16:30\n情報源: http://nikkokug.org/\n一覧:
-  https://upopotennis-gif.github.io/kokugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
 UID:7e3adfe7b4729e0e5a6f@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20261010T100000
