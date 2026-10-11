@@ -17,8 +17,9 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20261114T140000
 DTEND;TZID=Asia/Tokyo:20261114T160000
 SUMMARY:日本国語教育学会 山形支部研究会
-DESCRIPTION:時間: 14:00〜16:00\n情報源: http://nikkokug.org/posts/act
- ivity1.html\n一覧: https://upopotennis-gif.github.io/kokugo-kenkyukai-in
- fo/
+DESCRIPTION:時間: 14:00〜16:00\n申込締切: 2026-10-30\n申込方法: 
+ 渡部美千恵先生へメール: toyodasho@nagai-ed.jp\n情報源: http:
+ //nikkokug.org/posts/activity1.html\n一覧: https://upopotennis-gif.githu
+ b.io/kokugo-kenkyukai-info/
 END:VEVENT
 END:VCALENDAR
