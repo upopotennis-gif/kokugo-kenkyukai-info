@@ -118,6 +118,19 @@ DESCRIPTION:時間: 15:30〜18:30\n申込方法: 美谷島秀明先生へ
  okugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
+UID:0c6bc4b7f0e57ab56fdd@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261121T090000
+DTEND;TZID=Asia/Tokyo:20261121T170000
+SUMMARY:東京学芸大学附属国際中等教育学校 第10回公開研
+ 究会
+DESCRIPTION:時間: 9:00〜17:00 (予定)\n申込締切: 2026-11-15\n申込
+ 方法: 申込フォーム(Peatix): https://peatix.com/event/5190844 (11/1
+ 5まで・当日参加も可)\n情報源: https://www.iss.oizumi.u-gakugei
+ .ac.jp/2026/16130/\n一覧: https://upopotennis-gif.github.io/kokugo-kenky
+ ukai-info/
+END:VEVENT
+BEGIN:VEVENT
 UID:402591a2151d75e83c1e@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20261121

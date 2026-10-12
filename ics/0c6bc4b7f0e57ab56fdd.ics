@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//kokugo-kenkyukai-info//JA
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Tokyo
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0900
+TZOFFSETTO:+0900
+TZNAME:JST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:0c6bc4b7f0e57ab56fdd@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261121T090000
+DTEND;TZID=Asia/Tokyo:20261121T170000
+SUMMARY:東京学芸大学附属国際中等教育学校 第10回公開研
+ 究会
+DESCRIPTION:時間: 9:00〜17:00 (予定)\n申込締切: 2026-11-15\n申込
+ 方法: 申込フォーム(Peatix): https://peatix.com/event/5190844 (11/1
+ 5まで・当日参加も可)\n情報源: https://www.iss.oizumi.u-gakugei
+ .ac.jp/2026/16130/\n一覧: https://upopotennis-gif.github.io/kokugo-kenky
+ ukai-info/
+END:VEVENT
+END:VCALENDAR
