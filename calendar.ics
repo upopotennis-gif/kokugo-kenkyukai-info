@@ -200,6 +200,16 @@ DESCRIPTION:時間: 13:00〜16:30 (受付12:30〜)\n申込締切: 2026-12-1
  upopotennis-gif.github.io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
+UID:c8d8224c0bdb62364372@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:早稲田大学国語教育学会 漢文教育研究会 第3回例
+ 会
+DESCRIPTION:情報源: https://assoc-w-kokukyou.w.waseda.jp/\n一覧: https
+ ://upopotennis-gif.github.io/kokugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
 UID:af594309af7003acc35b@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20270313T170000
