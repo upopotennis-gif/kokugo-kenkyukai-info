@@ -17,39 +17,6 @@ TZNAME:JST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:ad9af415c6817626e393@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261031T140000
-DTEND;TZID=Asia/Tokyo:20261031T163000
-SUMMARY:日本国語教育学会 中学校部会公開研究会
-DESCRIPTION:時間: 14:00〜16:30\n申込締切: 2026-10-30\n情報源: htt
- p://nikkokug.org/bukai.html\n一覧: https://upopotennis-gif.github.io/kok
- ugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
-UID:3902ff30509ec4034f27@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261031T130000
-DTEND;TZID=Asia/Tokyo:20261031T140000
-SUMMARY:早稲田大学国語教育学会 2026年度秋季例会（第309
- 回・第20回学生会員研究発表会）
-DESCRIPTION:時間: 13:00〜 (対面 12:30開場)\n情報源: https://assoc
- -w-kokukyou.w.waseda.jp/\n一覧: https://upopotennis-gif.github.io/kokugo
- -kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
-UID:c9c4f64865225e2b8bb6@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261031T210000
-DTEND;TZID=Asia/Tokyo:20261031T223000
-SUMMARY:第46回今日も明日も授業道オンライン交流会（生
- 成AI×文学）
-DESCRIPTION:時間: 21:00〜22:30 (希望者は23:00まで)\n申込締切: 
- 2026-10-31\n申込方法: 申込フォーム: https://forms.gle/nExZx938MW
- RCcS9G9 (10/31 18:00まで)\n一覧: https://upopotennis-gif.github.io/kok
- ugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
 UID:0bccf8dee002f471035a@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20261105
@@ -179,6 +146,16 @@ SUMMARY:国語教育史と実践に学ぶ会 第255回研究会
 DESCRIPTION:時間: 15:30〜18:30\n申込方法: 美谷島秀明先生へ
  メール: biyajima@waseda.jp\n一覧: https://upopotennis-gif.github.io/k
  okugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
+UID:935d5b184de033085ab2@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20270109T140000
+DTEND;TZID=Asia/Tokyo:20270109T170000
+SUMMARY:全国大学国語教育学会 鳥取大会 公開講座
+DESCRIPTION:時間: 14:00〜17:00\n情報源: https://sites.google.com/view
+ /jtsj2026tottori/home\n一覧: https://upopotennis-gif.github.io/kokugo-ke
+ nkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
 UID:c562e6298cfa2f2d4486@kokugo-kenkyukai-info
