@@ -37,11 +37,13 @@ END:VEVENT
 BEGIN:VEVENT
 UID:795065a5a5edc60993b8@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261114T170000
-DTEND;TZID=Asia/Tokyo:20261114T180000
+DTSTART;TZID=Asia/Tokyo:20261114T140000
+DTEND;TZID=Asia/Tokyo:20261114T193000
 SUMMARY:國學院大學国語教育研究会 第57回月例会
-DESCRIPTION:時間: 17:00〜\n一覧: https://upopotennis-gif.github.io/kok
- ugo-kenkyukai-info/
+DESCRIPTION:時間: 第1部 14:00〜16:30頃 ／ 第2部 17:00〜19:00頃 
+ ／ 第3部(懇親会) 19:30頃〜\n申込締切: 2026-11-13\n申込方法
+ : 申込フォーム: https://forms.gle/euLEFzyrCNV469iz8 (11/13まで)\n
+ 一覧: https://upopotennis-gif.github.io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
 UID:570a270f4f41cc544ae8@kokugo-kenkyukai-info
