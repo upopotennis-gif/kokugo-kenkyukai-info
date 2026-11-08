@@ -26,15 +26,6 @@ DESCRIPTION:情報源: https://ed-asso.jp/\n一覧: https://upopotennis-gif
  .github.io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
-UID:e59760bf6b5229cb5857@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261107T143000
-DTEND;TZID=Asia/Tokyo:20261107T173000
-SUMMARY:日本国語教育学会 高等学校部会 第90回研究会
-DESCRIPTION:時間: 14:30〜17:30\n一覧: https://upopotennis-gif.github.i
- o/kokugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
 UID:795065a5a5edc60993b8@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20261114T140000
