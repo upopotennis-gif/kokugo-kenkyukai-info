@@ -93,13 +93,37 @@ DESCRIPTION:時間: 13:00〜 (12:30受付)\n申込方法: 日本文学協
  thub.io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
+UID:90e552dc8a81a5e2109a@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261201T120000
+DTEND;TZID=Asia/Tokyo:20261201T125000
+SUMMARY:川崎市立橘高等学校 公開授業 国語「現代の国語
+ 」
+DESCRIPTION:時間: 12:00〜12:50\n申込締切: 2026-11-30\n申込方法: 
+ 案内文書（8川教橘全第168号）の二次元コードから（川
+ 崎市立学校教員向け）\n一覧: https://upopotennis-gif.github.io/
+ kokugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
+UID:4a48d4c2ef9573042c57@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=Asia/Tokyo:20261209T143500
+DTEND;TZID=Asia/Tokyo:20261209T152500
+SUMMARY:川崎市立橘高等学校 公開授業 国語「論理国語」
+DESCRIPTION:時間: 14:35〜15:25\n申込締切: 2026-12-08\n申込方法: 
+ 案内文書（8川教橘全第168号）の二次元コードから（川
+ 崎市立学校教員向け）\n一覧: https://upopotennis-gif.github.io/
+ kokugo-kenkyukai-info/
+END:VEVENT
+BEGIN:VEVENT
 UID:d4a81033edb4e01d7110@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
-DTSTART;VALUE=DATE:20261212
-DTEND;VALUE=DATE:20261213
+DTSTART;TZID=Asia/Tokyo:20261212T140000
+DTEND;TZID=Asia/Tokyo:20261212T172000
 SUMMARY:國學院大學国語教育研究会 第14回大会
-DESCRIPTION:時間: 午後\n一覧: https://upopotennis-gif.github.io/kokug
- o-kenkyukai-info/
+DESCRIPTION:時間: 14:00〜17:20（受付13:00）\n申込締切: 2026-12-0
+ 6\n申込方法: https://forms.gle/21q3o4LcL7qdN87q6\n一覧: https://upop
+ otennis-gif.github.io/kokugo-kenkyukai-info/
 END:VEVENT
 BEGIN:VEVENT
 UID:fbb8790e6555c46dd2eb@kokugo-kenkyukai-info

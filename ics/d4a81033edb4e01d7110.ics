@@ -14,10 +14,11 @@ END:VTIMEZONE
 BEGIN:VEVENT
 UID:d4a81033edb4e01d7110@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
-DTSTART;VALUE=DATE:20261212
-DTEND;VALUE=DATE:20261213
+DTSTART;TZID=Asia/Tokyo:20261212T140000
+DTEND;TZID=Asia/Tokyo:20261212T172000
 SUMMARY:國學院大學国語教育研究会 第14回大会
-DESCRIPTION:時間: 午後\n一覧: https://upopotennis-gif.github.io/kokug
- o-kenkyukai-info/
+DESCRIPTION:時間: 14:00〜17:20（受付13:00）\n申込締切: 2026-12-0
+ 6\n申込方法: https://forms.gle/21q3o4LcL7qdN87q6\n一覧: https://upop
+ otennis-gif.github.io/kokugo-kenkyukai-info/
 END:VEVENT
 END:VCALENDAR
