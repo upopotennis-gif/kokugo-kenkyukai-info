@@ -17,26 +17,6 @@ TZNAME:JST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:402591a2151d75e83c1e@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;VALUE=DATE:20261121
-DTEND;VALUE=DATE:20261123
-SUMMARY:國學院大學國文學會 秋季大会
-DESCRIPTION:一覧: https://upopotennis-gif.github.io/kokugo-kenkyukai-info
- /
-END:VEVENT
-BEGIN:VEVENT
-UID:f58d732429f461849008@kokugo-kenkyukai-info
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=Asia/Tokyo:20261122T150000
-DTEND;TZID=Asia/Tokyo:20261122T160000
-SUMMARY:これからの高校国語教育研究会 第36回例会
-DESCRIPTION:時間: 15:00〜\n申込締切: 2026-11-13\n申込方法: 申
- 込フォーム(懇親会の申込も同フォーム): https://forms.gle/d
- 3KLt1HJkoQXzyRU8 (11/13まで)\n一覧: https://upopotennis-gif.github.io/
- kokugo-kenkyukai-info/
-END:VEVENT
-BEGIN:VEVENT
 UID:6c967ba9f41f0b4bd70b@kokugo-kenkyukai-info
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=Asia/Tokyo:20261128T150000
