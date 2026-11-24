@@ -159,4 +159,13 @@ DESCRIPTION:申込締切: 2026-12-31\n情報源: https://www.zenkankyo.gr.j
  p/info/info_society/1812/\n一覧: https://upopotennis-gif.github.io/kokug
  o-kenkyukai-info/
 END:VEVENT
+BEGIN:VEVENT
+UID:30081971448121e05829@kokugo-kenkyukai-info
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271113
+DTEND;VALUE=DATE:20271115
+SUMMARY:全国大学国語教育学会 秋季大会（福島大学）
+DESCRIPTION:情報源: https://www.jtsj.org/taikai\n一覧: https://upopote
+ nnis-gif.github.io/kokugo-kenkyukai-info/
+END:VEVENT
 END:VCALENDAR
